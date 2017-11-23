@@ -1,3 +1,3 @@
 const FETCH_PODCAST = 'fetch_podcast';
-const TEMP = 'fetch_podcast';
-export { FETCH_PODCAST, TEMP };
+const SET_FILTER = 'set_filter';
+export { FETCH_PODCAST, SET_FILTER };

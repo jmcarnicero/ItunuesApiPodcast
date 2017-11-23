@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { FETCH_PODCAST } from './types';
 
-export function fetchPodcasts(url) {
+export function fetchPodcasts() {
   return (dispatch) => {
+    const url = 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
     axios.get(url).then((response) => {
       dispatch({
         type: FETCH_PODCAST,
@@ -12,7 +13,7 @@ export function fetchPodcasts(url) {
   };
 }
 
-// avoid export default linter rule
+// avoid linter rule . prefer export default
 export function tmp() {
   return true;
 }
