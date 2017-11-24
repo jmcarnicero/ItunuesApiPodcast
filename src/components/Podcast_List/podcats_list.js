@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import PodcastList from './podcast_list';
+import * as actions from '../../actions';
 import Filter from './filter';
+import PodcastCard from './podcast_card';
 
-class podcastsFiltered extends Component {
+class PodcastList extends Component {
   static propTypes = {
     podcasts: PropTypes.arrayOf(PropTypes.shape).isRequired,
+    fetchPodcasts: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = { podcasts: this.props.podcasts, itemsFiltered: 100 };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeFilter = this.handleChangeFilter.bind(this);
     this.filterPodcast = this.filterPodcast.bind(this);
+  }
+  componentWillMount() {
+    this.props.fetchPodcasts();
   }
 
   componentWillReceiveProps(newProps) {
@@ -37,7 +42,7 @@ class podcastsFiltered extends Component {
     return filtered;
   }
 
-  handleChange(e) {
+  handleChangeFilter(e) {
     const podcastFiltered = this.filterPodcast(e.currentTarget.value);
     this.setState({
       podcasts: podcastFiltered,
@@ -46,11 +51,20 @@ class podcastsFiltered extends Component {
   }
 
   render() {
+    const renderPodcast = (item, i) => (
+      <li>
+        <PodcastCard key={i} {...item} />
+      </li>
+    );
+
     return (
       <div>
+        <h1>PodcastList</h1>
         {this.state.itemsFiltered}
-        <Filter handleChange={this.handleChange} />
-        <PodcastList podcasts={this.state.podcasts} />
+        <Filter handleChange={this.handleChangeFilter} />
+        <div className="podcast-list grid-container">
+          <ul>{this.state.podcasts.map(renderPodcast)}</ul>
+        </div>
       </div>
     );
   }
@@ -60,4 +74,8 @@ function mapStateToProps(state) {
   return { podcasts: state.podcasts, filter: state.filter };
 }
 
-export default connect(mapStateToProps)(podcastsFiltered);
+const mapDispatchToProps = dispatch => ({
+  fetchPodcasts: () => dispatch(actions.fetchPodcasts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PodcastList);

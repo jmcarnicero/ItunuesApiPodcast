@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions';
 import '../styles/App.css';
 
-import PodcastFiltered from './podcats_filtered';
-
 class App extends Component {
   static propTypes = {
     fetchPodcasts: PropTypes.func.isRequired,
@@ -21,7 +19,6 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Podcasters</h1>
         </header>
-        <PodcastFiltered />
       </div>
     );
   }

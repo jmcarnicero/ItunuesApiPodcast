@@ -1,3 +1,4 @@
 const FETCH_PODCAST = 'fetch_podcast';
-const SET_FILTER = 'set_filter';
-export { FETCH_PODCAST, SET_FILTER };
+const FETCH_PODCAST_DETAIL = 'fetch_podcast_detail';
+const SET_PODCAST_SELECTED = 'set_podcast_selected';
+export { FETCH_PODCAST, FETCH_PODCAST_DETAIL, SET_PODCAST_SELECTED };
