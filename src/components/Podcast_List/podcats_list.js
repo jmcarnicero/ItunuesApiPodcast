@@ -52,8 +52,8 @@ class PodcastList extends Component {
 
   render() {
     const renderPodcast = (item, i) => (
-      <li>
-        <PodcastCard key={i} {...item} />
+      <li key={i}>
+        <PodcastCard {...item} />
       </li>
     );
 
