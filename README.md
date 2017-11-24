@@ -8,15 +8,18 @@ Naptilus
 ----- Compnents -----
   App
     Header
+
     Podcast_List/
       Podcast_list
-      Filter
-      Podcast_card
+        Filter
+        Podcast_card
 
     Podcast_Detail/
       podcast_detail
-      Podcast_track_list
+        Podcast_info
+        Podcast_track_list
 
     Podcast_Chapter/
       Podcast_chapter
-      Podcast_track_detail
+        Podcast_info *
+        Podcast_track_detail
