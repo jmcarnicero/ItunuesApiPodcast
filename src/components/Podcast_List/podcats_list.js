@@ -28,18 +28,15 @@ class PodcastList extends Component {
   }
 
   filterPodcast(filter) {
-    const filtered = this.props.podcasts.filter((podcast) => {
+    return this.props.podcasts.filter((podcast) => {
       const filterName = podcast['im:name'].label.indexOf(filter);
       const filterArtist = podcast['im:artist'].label.indexOf(filter);
 
       if (filterName > -1 || filterArtist > -1) {
         return podcast;
       }
-
       return false;
     });
-
-    return filtered;
   }
 
   handleChangeFilter(e) {
@@ -71,7 +68,10 @@ class PodcastList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { podcasts: state.podcasts, filter: state.filter };
+  return {
+    podcasts: state.podcasts,
+    filter: state.filter,
+  };
 }
 
 const mapDispatchToProps = dispatch => ({
