@@ -1,13 +1,9 @@
 Naptilus
 
------ Views -----
-  Podcast_List        URL:​ /
-  Podcast_Detail      URL:​ /podcast/{podcastId}
-  Podcast_Chapter     URL:​ /podcast/{podcastId}/episode/{episodeId}
+----- Views ----- Podcast_List URL:​ / Podcast_Detail URL:​ /podcast/{podcastId} Podcast_Chapter
+URL:​ /podcast/{podcastId}/episode/{episodeId}
 
------ Compnents -----
-  App
-    Header
+----- Compnents ----- App Loading Header
 
     Podcast_List/
       Podcast_list
