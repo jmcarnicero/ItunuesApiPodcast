@@ -11,6 +11,14 @@
   }
 }
 
+.Loading__indicator {
+  border: 1px solid blue;
+  width: 20px;
+  height: 20px;
+  background-color: blue;
+  border-radius: 50%;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto auto;

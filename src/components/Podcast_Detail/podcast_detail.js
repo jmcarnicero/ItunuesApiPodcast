@@ -61,7 +61,6 @@ PodcastDetail.propTypes = {
 };
 
 function mapStateToProps(state) {
-  console.log('state', state);
   return {
     podcastSelected: state.podcastSelected,
     podcastDetail: state.podcastDetail,
