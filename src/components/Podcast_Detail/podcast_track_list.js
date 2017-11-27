@@ -7,10 +7,6 @@ class PodcastTrackList extends Component {
     router: PropTypes.shape(),
   };
 
-  constructor(props) {
-    super(props);
-    return true;
-  }
   render() {
     const checkItemDuration = (item) => {
       if (!item['itunes:duration']) {
@@ -45,9 +41,7 @@ class PodcastTrackList extends Component {
 }
 
 PodcastTrackList.propTypes = {
-  // tracks: PropTypes.objectOf(PropTypes.shape).isRequired,
-  tracks: PropTypes.oneOfType([PropTypes.shape, PropTypes.objectOf]).isRequired,
-  // tracks: React.PropTypes.object.isRequired,
+  tracks: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 export default PodcastTrackList;

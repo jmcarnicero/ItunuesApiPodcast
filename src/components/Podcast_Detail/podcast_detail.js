@@ -54,7 +54,7 @@ PodcastDetail.propTypes = {
   fetchPodcastDetail: PropTypes.func.isRequired,
   podcastDetail: PropTypes.shape().isRequired,
   podcastSelected: PropTypes.shape().isRequired,
-  tracks: PropTypes.oneOfType([PropTypes.shape, PropTypes.objectOf]).isRequired,
+  tracks: PropTypes.arrayOf(PropTypes.shape).isRequired,
   params: PropTypes.shape({
     podcastId: PropTypes.string,
   }).isRequired,
