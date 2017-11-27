@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-// function PodcastTrackList(props) {
-
 class PodcastTrackList extends Component {
   static contextTypes = {
     router: PropTypes.shape(),
@@ -14,15 +12,27 @@ class PodcastTrackList extends Component {
     return true;
   }
   render() {
-    const trackLink = (item, i) => (
-      <li key={i}>
-        <Link to={`/podcast/${this.context.router.params.podcastId}/episode/${i}`}>
-          Title{item.title[0]}
-          pubDate{item.pubDate[0]}
-          Duration{item['itunes:duration'][0]}
-        </Link>
-      </li>
-    );
+    const checkItemDuration = (item) => {
+      if (!item['itunes:duration']) {
+        item['itunes:duration'] = [0];
+        return item;
+      }
+
+      return item;
+    };
+
+    const trackLink = (item, i) => {
+      const itemTmp = checkItemDuration(item);
+      return (
+        <li key={i}>
+          <Link to={`/podcast/${this.context.router.params.podcastId}/episode/${i}`}>
+            Title{itemTmp.title[0]}
+            pubDate{itemTmp.pubDate[0]}
+            Duration{itemTmp['itunes:duration'][0]}
+          </Link>
+        </li>
+      );
+    };
 
     return (
       <div>
