@@ -1,7 +1,13 @@
 Naptilus
 
------ Views ----- Podcast_List URL:​ / Podcast_Detail URL:​ /podcast/{podcastId} Podcast_Chapter
-URL:​ /podcast/{podcastId}/episode/{episodeId}
+----- Deploy ----- 
+https://napptilus.herokuapp.com/#/
+
+----- Views -----
+
+Podcast_List    URL:​ /
+Podcast_Detail  URL:​ /podcast/{podcastId}
+Podcast_Chapter URL:​ /podcast/{podcastId}/episode/{episodeId}
 
 ----- Compnents ----- App Loading Header
 
