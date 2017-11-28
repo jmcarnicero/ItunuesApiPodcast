@@ -17,17 +17,18 @@ export function isLoading(loading) {
   };
 }
 
+export function setError(error) {
+  return {
+    type: SET_ERROR,
+    payload: error,
+  };
+}
+
 function cachedUrl(url, dispatch) {
   const expiry = 60 * 60 * 25; // 1day   default
 
+  dispatch(setError(''));
   dispatch(isLoading(true));
-
-  // if (typeof options === 'number') {
-  //   expiry = options;
-  //   options = undefined;
-  // } else if (typeof options === 'object') {
-  //   expiry = options.seconds || expiry;
-  // }
 
   const cacheKey = url;
   const cached = localStorage.getItem(cacheKey);
@@ -50,37 +51,37 @@ function cachedUrl(url, dispatch) {
       if (response.status === 200) {
         dispatch(isLoading(false));
         const ct = response.headers['content-type'];
-        if (ct && (ct.match(/application\/json/i) || ct.match(/text\//i))) {
-          const responseStringify = JSON.stringify(Object.assign({}, response));
 
+        if (ct !== 'text/html; charset=UTF-8') {
+          const responseStringify = JSON.stringify(Object.assign({}, response));
           localStorage.setItem(cacheKey, responseStringify);
           localStorage.setItem(`${cacheKey}:ts`, Date.now());
+        } else {
+          dispatch(setError('No es un json valido'));
+          return Promise.reject();
         }
       }
-      dispatch(isLoading(false));
       return response;
     })
-    .catch(error => error);
-}
-
-export function setError(error) {
-  return {
-    type: SET_ERROR,
-    payload: error,
-  };
+    .catch((error) => {
+      dispatch(isLoading(false));
+      dispatch(setError(error));
+      return error;
+    });
 }
 
 const parseXml = (dipstach, xml) => {
   let result = [];
+
   parseString(xml, (err, data) => {
     if (err) {
-      console.log('err', err, dipstach);
-      dipstach(setError, err);
+      dipstach(setError('Xml no valido'));
       return [];
     }
     result = data.rss.channel[0].item;
     return result;
   });
+
   return result;
 };
 
@@ -94,27 +95,28 @@ export function cleanTraks() {
 export function fetchFeeds(url) {
   return (dispatch) => {
     const completeUrl = `https://cors-anywhere.herokuapp.com/${url}`;
-    cachedUrl(completeUrl, dispatch).then((response) => {
-      const dataParse = parseXml(dispatch, response.data);
-      dispatch({
-        type: SET_TRACKS,
-        payload: dataParse,
+    cachedUrl(completeUrl, dispatch)
+      .then((response) => {
+        const dataParse = parseXml(dispatch, response.data);
+        dispatch({
+          type: SET_TRACKS,
+          payload: dataParse,
+        });
+      })
+      .catch(() => {
+        dispatch(setError('Feed novalido'));
       });
-    });
   };
 }
 
 export function fetchPodcasts() {
   return (dispatch) => {
-    // dispatch(isLoading(true));
     const url = 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
 
     cachedUrl(url, dispatch).then((response) => {
-      const podcast = response;
-      // dispatch(isLoading(false));
       dispatch({
         type: FETCH_PODCAST,
-        payload: podcast,
+        payload: response,
       });
     });
   };
@@ -143,7 +145,8 @@ export function fetchPodcastDetail(id) {
         type: FETCH_PODCAST_DETAIL,
         payload: response,
       });
-      dispatch(fetchFeeds(response.data.results[0].feedUrl));
+      const feedUrl = response.data.results[0].feedUrl; // eslint-disable-line prefer-destructuring
+      dispatch(fetchFeeds(feedUrl));
     });
   };
 }
