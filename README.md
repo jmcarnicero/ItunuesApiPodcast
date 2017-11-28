@@ -1,6 +1,15 @@
 Naptilus
 
------ Deploy ----- 
+----- Instalacion de dependencias -----
+  npm install
+
+----- Arrancar modo dev -----
+  npm start
+
+----- Build -----
+  Npm build
+
+----- Deploy -----
 https://napptilus.herokuapp.com/#/
 
 ----- Views -----
@@ -9,7 +18,10 @@ Podcast_List    URL:​ /
 Podcast_Detail  URL:​ /podcast/{podcastId}
 Podcast_Chapter URL:​ /podcast/{podcastId}/episode/{episodeId}
 
------ Compnents ----- App Loading Header
+----- Compnents -----
+    App
+    Loading
+    Header
 
     Podcast_List/
       Podcast_list
