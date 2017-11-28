@@ -11,19 +11,13 @@ class PodcastDetail extends Component {
     children: PropTypes.objectOf(),
   };
 
-  constructor(props) {
-    super(props);
-    this.props.setPodcastSelected(this.props.params.podcastId);
+  componentWillMount() {
     this.props.fetchPodcastDetail(this.props.params.podcastId);
-    this.state = { podcastDetail: {}, tracks: [] };
+    this.setState({ tracks: [] });
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.podcastDetail.feedUrl && nextProps.podcastDetail !== this.state.podcastDetail) {
-      this.setState({ podcastDetail: nextProps.podcastDetail });
-      this.props.fetchFeeds(nextProps.podcastDetail.feedUrl);
-    }
-    if (nextProps.tracks.length && nextProps.tracks !== this.state.tracks) {
+    if (nextProps.tracks !== this.state.tracks) {
       this.setState({ tracks: nextProps.tracks });
     }
   }
@@ -31,16 +25,19 @@ class PodcastDetail extends Component {
   render() {
     const renderInfo = () => {
       if (Object.keys(this.props.podcastSelected).length > 0) {
-        return <PodcastInfo {...this.props.podcastSelected} />;
+        return <PodcastInfo {...this.props.podcastSelected} {...this.context} />;
       }
       return null;
     };
 
     return (
       <div>
-        <h1>PodcastDetail</h1>
-        {renderInfo()}
-        <PodcastTrackList tracks={this.state.tracks} />
+        {}
+        <div className="col-md-3">{renderInfo()}</div>
+        <div className="col-md-9">
+          <PodcastTrackList tracks={this.state.tracks} />
+        </div>
+
         {this.props.children}
       </div>
     );
