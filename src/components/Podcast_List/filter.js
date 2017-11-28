@@ -3,9 +3,14 @@ import PropTypes from 'prop-types';
 
 function Filter(props) {
   return (
-    <div>
-      <h1>Filter</h1>
-      <input type="text" onChange={e => props.handleChange(e)} />
+    <div className="input-group input-group-sm pull-right">
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Filter Podcast"
+        aria-describedby="sizing-addon2"
+        onChange={e => props.handleChange(e)}
+      />
     </div>
   );
 }

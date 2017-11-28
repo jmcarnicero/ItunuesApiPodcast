@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 const PodcastCard = props => (
-  <div className="podcast">
-    <Link to={`/podcast/${props.id.attributes['im:id']}`}>
-      <img className="podcast__img" src={props['im:image'][0].label} alt={props['im:name'].label} />
-      <h4 className="podcast__name ">{props['im:name'].label}</h4>
-      <span className="podcast__author ">Author : {props['im:artist'].label}</span>
+  <div className="podcast card">
+    <Link className="card-link" to={`/podcast/${props.id.attributes['im:id']}`}>
+      <img
+        className="podcast__img card-img-top"
+        src={props['im:image'][0].label}
+        alt={props['im:name'].label}
+      />
     </Link>
+    <h4 className="podcast__name card-title ">{props['im:name'].label}</h4>
+    <span className="podcast__author card-text">Author : {props['im:artist'].label}</span>
   </div>
 );
 

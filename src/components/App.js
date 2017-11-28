@@ -4,12 +4,16 @@ import Loading from './loading';
 import '../styles/App.css';
 
 const App = props => (
-  <div className="App">
-    <header className="App-header">
-      <h1 className="App-title">Podcasters</h1>
-      <Loading />
-    </header>
-    {props.children}
+  <div>
+    <div className="row">
+      <div classnames="header clearfix ">
+        <Loading />
+        <a className="navbar-brand" href="#/">
+          Podcasters
+        </a>
+      </div>
+    </div>
+    <div>{props.children}</div>
   </div>
 );
 

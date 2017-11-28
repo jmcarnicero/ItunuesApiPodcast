@@ -10,31 +10,47 @@ class PodcastTrackList extends Component {
   render() {
     const checkItemDuration = (item) => {
       if (!item['itunes:duration']) {
-        item['itunes:duration'] = [0];
+        const element = item;
+        element['itunes:duration'] = [0];
         return item;
       }
 
       return item;
     };
 
+    const formatDate = (date) => {
+      const dateSplit = date.split(' ');
+      return `${dateSplit[1]}/${dateSplit[2]}/${dateSplit[3]}`;
+    };
+
     const trackLink = (item, i) => {
       const itemTmp = checkItemDuration(item);
       return (
-        <li key={i}>
-          <Link to={`/podcast/${this.context.router.params.podcastId}/episode/${i}`}>
-            Title{itemTmp.title[0]}
-            pubDate{itemTmp.pubDate[0]}
-            Duration{itemTmp['itunes:duration'][0]}
-          </Link>
-        </li>
+        <tr key={i}>
+          <td>
+            <Link to={`/podcast/${this.context.router.params.podcastId}/episode/${i}`}>
+              {itemTmp.title[0]}
+            </Link>
+          </td>
+          <td>{formatDate(itemTmp.pubDate[0])}</td>
+          <td>{itemTmp['itunes:duration'][0]}</td>
+        </tr>
       );
     };
 
     return (
       <div>
-        Episodes {this.props.tracks.length}
-        <h1>Track list</h1>
-        {this.props.tracks.map(trackLink)}
+        <div className="card card-episodes"> Episodes {this.props.tracks.length}</div>
+        <table className="card table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Date</th>
+              <th scope="col">Duration</th>
+            </tr>
+          </thead>
+          <tbody>{this.props.tracks.map(trackLink)}</tbody>
+        </table>
       </div>
     );
   }

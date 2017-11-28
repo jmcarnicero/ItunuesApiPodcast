@@ -1,3 +1,7 @@
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -19,15 +23,17 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/" component={App}>
-        <IndexRoute component={PodcastList} />
-        <Route path="/podcast/:podcastId" component={PodcastDetail} />
-        <Route path="/podcast/:podcastId/episode/:episodeId" component={PodcastChapter} />
-      </Route>
-    </Router>
-  </Provider>,
+  <div className="container">
+    <Provider store={store}>
+      <Router history={hashHistory}>
+        <Route path="/" component={App}>
+          <IndexRoute component={PodcastList} />
+          <Route path="/podcast/:podcastId" component={PodcastDetail} />
+          <Route path="/podcast/:podcastId/episode/:episodeId" component={PodcastChapter} />
+        </Route>
+      </Router>
+    </Provider>,
+  </div>,
   document.getElementById('root'),
 );
 registerServiceWorker();

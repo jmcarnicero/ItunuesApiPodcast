@@ -48,19 +48,20 @@ class PodcastList extends Component {
   }
 
   render() {
-    const renderPodcast = (item, i) => (
-      <li key={i}>
-        <PodcastCard {...item} />
-      </li>
-    );
+    const renderPodcast = (item, i) => <PodcastCard key={i} {...item} />;
 
     return (
       <div>
-        <h1>PodcastList</h1>
-        {this.state.itemsFiltered}
-        <Filter handleChange={this.handleChangeFilter} />
-        <div className="podcast-list grid-container">
-          <ul>{this.state.podcasts.map(renderPodcast)}</ul>
+        <div className="row">
+          <Filter handleChange={this.handleChangeFilter} />
+          <span className="label label-primary pull-right itemsFiltered">
+            {this.state.itemsFiltered}
+          </span>
+        </div>
+        <div className="row podcast-list">
+          <div className="podcast-list grid-container">
+            {this.state.podcasts.map(renderPodcast)}
+          </div>
         </div>
       </div>
     );
