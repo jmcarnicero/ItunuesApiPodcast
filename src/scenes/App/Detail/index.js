@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actions from '../../actions';
+import * as actions from '../../../data/actions';
 
-import PodcastInfo from '../podcast_info';
-import PodcastTrackList from './podcast_track_list';
+import Info from '../../../components/Info';
+import TrackList from './components/TrackList';
 
-class PodcastDetail extends Component {
+class Detail extends Component {
   static defaultProps = {
     children: PropTypes.objectOf(),
   };
@@ -25,7 +25,7 @@ class PodcastDetail extends Component {
   render() {
     const renderInfo = () => {
       if (Object.keys(this.props.podcastSelected).length > 0) {
-        return <PodcastInfo {...this.props.podcastSelected} {...this.context} />;
+        return <Info {...this.props.podcastSelected} {...this.context} />;
       }
       return null;
     };
@@ -35,7 +35,7 @@ class PodcastDetail extends Component {
         {}
         <div className="col-md-3">{renderInfo()}</div>
         <div className="col-md-9">
-          <PodcastTrackList tracks={this.state.tracks} />
+          <TrackList tracks={this.state.tracks} />
         </div>
 
         {this.props.children}
@@ -44,7 +44,7 @@ class PodcastDetail extends Component {
   }
 }
 
-PodcastDetail.propTypes = {
+Detail.propTypes = {
   children: PropTypes.objectOf(),
   fetchFeeds: PropTypes.func.isRequired,
   setPodcastSelected: PropTypes.func.isRequired,
@@ -73,4 +73,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PodcastDetail);
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);

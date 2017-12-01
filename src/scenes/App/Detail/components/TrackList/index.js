@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-class PodcastTrackList extends Component {
+class TrackList extends Component {
   static contextTypes = {
     router: PropTypes.shape(),
   };
@@ -56,8 +56,8 @@ class PodcastTrackList extends Component {
   }
 }
 
-PodcastTrackList.propTypes = {
+TrackList.propTypes = {
   tracks: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
-export default PodcastTrackList;
+export default TrackList;

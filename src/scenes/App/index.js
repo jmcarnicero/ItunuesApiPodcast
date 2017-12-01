@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loading from './loading';
-import '../styles/App.css';
+import Loading from './components/Loading';
 
 const App = props => (
   <div>

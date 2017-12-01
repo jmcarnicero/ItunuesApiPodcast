@@ -9,12 +9,12 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-import App from './components/App';
-import PodcastList from './components/Podcast_List/podcats_list';
-import PodcastDetail from './components/Podcast_Detail/podcast_detail';
-import PodcastChapter from './components/Podcast_Chapter/podcast_chapter';
+import reducers from './data/reducers';
+import App from './scenes/App';
+import List from './scenes/App/List';
+import Detail from './scenes/App/Detail';
+import Track from './scenes/App/Track';
 
-import reducers from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 
 import './styles/App.css';
@@ -27,9 +27,9 @@ ReactDOM.render(
     <Provider store={store}>
       <Router history={hashHistory}>
         <Route path="/" component={App}>
-          <IndexRoute component={PodcastList} />
-          <Route path="/podcast/:podcastId" component={PodcastDetail} />
-          <Route path="/podcast/:podcastId/episode/:episodeId" component={PodcastChapter} />
+          <IndexRoute component={List} />
+          <Route path="/podcast/:podcastId" component={Detail} />
+          <Route path="/podcast/:podcastId/episode/:episodeId" component={Track} />
         </Route>
       </Router>
     </Provider>,

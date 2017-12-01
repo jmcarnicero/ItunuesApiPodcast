@@ -1,4 +1,28 @@
 Naptilus
+  index.js
+  app.js
+  styles/
+  data/
+    reducer.js
+    actions.js
+    types.js  
+  components/
+    Info/   
+  scenes/
+    App/
+      components/
+        Loading/  
+      Detail/  
+        ->PodcastDetail
+        components
+          TrackList/
+      List/  state.Podcasts
+        components/
+          Filter/
+          Card/
+      Track/   
+        ->PodcastDetail
+        TrackInfo/
 
 ----- Instalacion de dependencias -----
   npm install

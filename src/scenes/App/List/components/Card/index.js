@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
-const PodcastCard = props => (
+const Card = props => (
   <div className="podcast card">
     <Link className="card-link" to={`/podcast/${props.id.attributes['im:id']}`}>
       <img
@@ -16,11 +16,11 @@ const PodcastCard = props => (
   </div>
 );
 
-PodcastCard.propTypes = {
+Card.propTypes = {
   id: PropTypes.shape(PropTypes.func.isRequired).isRequired,
   'im:name': PropTypes.shape(PropTypes.func.isRequired).isRequired,
   'im:image': PropTypes.arrayOf(PropTypes.shape).isRequired,
   'im:artist': PropTypes.shape(PropTypes.func.isRequired).isRequired,
 };
 
-export default PodcastCard;
+export default Card;

@@ -1,14 +1,9 @@
-// import React, { Component } from 'react';
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import PodcastInfo from '../podcast_info';
+import Info from '../../../components/Info';
 
-// class PodcastChapter extends Component {
-// static defaultProps = {
-//   track: PropTypes.string,
-// };
-function PodcastChapter(props) {
+function Track(props) {
   const track = props.tracks[props.params.episodeId];
   const mp3Url = track.enclosure[0].$.url;
   const urlType = track.enclosure[0].$.type;
@@ -16,7 +11,7 @@ function PodcastChapter(props) {
   return (
     <div className="row">
       <div className="col-md-3">
-        <PodcastInfo {...props.podcastSelected} />
+        <Info {...props.podcastSelected} />
       </div>
 
       <div className=" col-md-9">
@@ -33,7 +28,7 @@ function PodcastChapter(props) {
   );
 }
 
-PodcastChapter.propTypes = {
+Track.propTypes = {
   podcastSelected: PropTypes.shape().isRequired,
   params: PropTypes.shape().isRequired,
   tracks: PropTypes.shape().isRequired,
@@ -47,4 +42,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PodcastChapter);
+export default connect(mapStateToProps)(Track);

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import * as actions from '../../actions';
-import Filter from './filter';
-import PodcastCard from './podcast_card';
 
-class PodcastList extends Component {
+import * as actions from '../../../data/actions/';
+import Filter from './components/Filter';
+import Card from './components/Card';
+
+class List extends Component {
   static propTypes = {
     podcasts: PropTypes.arrayOf(PropTypes.shape).isRequired,
     fetchPodcasts: PropTypes.func.isRequired,
@@ -48,7 +49,7 @@ class PodcastList extends Component {
   }
 
   render() {
-    const renderPodcast = (item, i) => <PodcastCard key={i} {...item} />;
+    const renderCard = (item, i) => <Card key={i} {...item} />;
 
     return (
       <div>
@@ -59,9 +60,7 @@ class PodcastList extends Component {
           </span>
         </div>
         <div className="row podcast-list">
-          <div className="podcast-list grid-container">
-            {this.state.podcasts.map(renderPodcast)}
-          </div>
+          <div className="podcast-list grid-container">{this.state.podcasts.map(renderCard)}</div>
         </div>
       </div>
     );
@@ -79,4 +78,4 @@ const mapDispatchToProps = dispatch => ({
   fetchPodcasts: () => dispatch(actions.fetchPodcasts()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PodcastList);
+export default connect(mapStateToProps, mapDispatchToProps)(List);

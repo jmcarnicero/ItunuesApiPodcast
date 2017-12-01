@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 // eslint-disable-next-line  react/prefer-stateless-function
-class PodcastInfo extends Component {
+class Info extends Component {
   static contextTypes = {
     router: PropTypes.shape(),
   };
@@ -38,11 +38,11 @@ class PodcastInfo extends Component {
   }
 }
 
-PodcastInfo.propTypes = {
+Info.propTypes = {
   'im:name': PropTypes.shape(PropTypes.func.isRequired).isRequired,
   'im:image': PropTypes.arrayOf(PropTypes.shape).isRequired,
   'im:artist': PropTypes.shape(PropTypes.func.isRequired).isRequired,
   summary: PropTypes.shape(PropTypes.func.isRequired).isRequired,
 };
 
-export default PodcastInfo;
+export default Info;
